@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee Manager Firebase</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">PROJECT DEMO</p>
+          <h1>Quản lý sản phẩm cà phê</h1>
+          <p class="subtext">
+            Demo học sinh tham khảo: Firebase Authentication + Firestore CRUD +
+            Cloudinary Upload + hướng dẫn test API bằng Apidog.
+          </p>
+        </div>
+        <div class="user-box">
+          <span id="authStatus">Chưa đăng nhập</span>
+          <button id="btnLogout" class="btn btn-outline" disabled>
+            Đăng xuất
+          </button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section id="login-card" class="card">
+          <h2>Tài khoản</h2>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="vd: hocsinh@gmail.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Tối thiểu 6 ký tự"
+            />
+          </div>
+          <div class="button-row">
+            <button id="btnRegister" class="btn">Đăng ký</button>
+            <button id="btnLogin" class="btn btn-secondary">Đăng nhập</button>
+          </div>
+          <p class="hint">
+            Bật Email/Password trong Firebase Authentication trước khi dùng.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2 id="formTitle">Thêm sản phẩm</h2>
+          <form id="productForm">
+            <div class="form-group">
+              <label for="name">Tên sản phẩm</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Cà phê sữa đá"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="price">Giá (VNĐ)</label>
+              <input
+                id="price"
+                type="number"
+                min="0"
+                placeholder="25000"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Mô tả</label>
+              <textarea
+                style="resize: none"
+                id="description"
+                rows="4"
+                placeholder="Đậm vị, thơm, dễ uống..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="imageFile">Ảnh sản phẩm</label>
+              <input id="imageFile" type="file" accept="image/*" />
+            </div>
+
+            <img id="previewImage" class="preview hidden" alt="preview" />
+            <button
+              id="btnRemoveImage"
+              type="button"
+              class="btn-close hidden"
+              alt="preview"
+            >
+              X
+            </button>
+
+            <div class="button-row">
+              <button type="submit" class="btn" id="submitBtn">
+                Lưu sản phẩm
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline hidden"
+                id="btnCancelEdit"
+              >
+                Hủy sửa
+              </button>
+            </div>
+          </form>
+          <p class="hint">
+            Ảnh được upload lên Cloudinary, sau đó lưu URL vào Firestore.
+          </p>
+        </section>
+      </main>
+
+      <section class="card full-width">
+        <div class="section-header">
+          <h2>Danh sách sản phẩm</h2>
+          <button id="btnReload" class="btn btn-outline">Tải lại</button>
+        </div>
+        <div id="loading" class="state hidden">Đang tải dữ liệu...</div>
+        <div id="emptyState" class="state">Hãy đăng nhập để xem sản phẩm.</div>
+        <div id="productList" class="product-list"></div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
